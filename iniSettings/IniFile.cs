@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -62,7 +63,22 @@ namespace iniSettings
             int i = GetPrivateProfileString(Section, Key, "", temp,
                                             255, this.path);
             return temp.ToString();
+        }
 
+        public List<string> GetSections()
+        {
+            List<string> list = new List<string>();
+            string[] lines = File.ReadAllLines(this.path, Encoding.Default);
+
+            foreach (string line in lines)
+            {
+                if (line.Contains("[") && line.Contains("]"))
+                {
+                    list.Add(line.Replace("[", "").Replace("]", ""));
+                }
+            }
+
+            return list;
         }
     }
 }
