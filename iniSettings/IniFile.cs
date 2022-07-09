@@ -68,7 +68,7 @@ namespace iniSettings
         public List<string> GetSections()
         {
             List<string> list = new List<string>();
-            string[] lines = File.ReadAllLines(this.path, Encoding.Default);
+            string[] lines = File.ReadAllLines(this.path, Encoding.UTF8);
 
             foreach (string line in lines)
             {
